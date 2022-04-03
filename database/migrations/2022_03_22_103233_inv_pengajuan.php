@@ -14,13 +14,13 @@ class InvPengajuan extends Migration
     public function up()
     {
         Schema::create('inv_pengajuan', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id')->autoIncrement();
             $table->integer('id_barang');
             $table->text('keterangan');
             $table->string('jumlah_pengajuan');
             $table->enum('verifikasi',['sudah','belum']);
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

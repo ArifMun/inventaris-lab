@@ -14,7 +14,7 @@ class InvBarang extends Migration
     public function up()
     {
         Schema::create('inv_barang', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id')->autoIncrement();
             $table->string('no_barang');
             $table->string('nama_barang');
             $table->integer('kategori');

@@ -33,11 +33,11 @@
 </head>
 
 <body class="login">
-    <div class="wrapper wrapper-login">
+    <div class="wrapper wrapper-login ">
         <div class="container container-login animated fadeIn">
-            <h3 class="text-center">Silahkan Log In</h3>
+            <h3 class="text-center">Silahkan Sign In</h3>
 
-            <form action="POST" action="/cek_login" enctype="multipart/form-data">
+            <form method="POST" action="{{url('proses_login')}}">
                 @csrf
                 <div class="login-form">
                     <div class="form-group form-floating-label">
@@ -68,3 +68,4 @@
 </body>
 
 </html>
+@include('sweetalert::alert')

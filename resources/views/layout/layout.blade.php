@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/azzara.min.css">
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="/assets/css/demo.css">
+    {{-- <link rel="stylesheet" href="/assets/css/demo.css"> --}}
 </head>
 
 <body>
@@ -42,7 +42,6 @@
         <div class="main-header" data-background-color="purple">
             <!-- Logo Header -->
             <div class="logo-header">
-
                 <a href="#" class="logo">
                     <img src="/assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
                 </a>
@@ -63,7 +62,6 @@
 
             <!-- Navbar Header -->
             <nav class="navbar navbar-header navbar-expand-lg">
-
                 <div class="container-fluid">
                     <div class="collapse" id="search-nav">
                         <form class="navbar-left navbar-form nav-search mr-md-3">
@@ -97,9 +95,9 @@
                                         <div class="avatar-lg"><img src="/assets/img/profile.jpg" alt="image profile"
                                                 class="avatar-img rounded"></div>
                                         <div class="u-text">
-                                            <h4>Hizrian</h4>
-                                            <p class="text-muted">hello@example.com</p><a href="profile.html"
-                                                class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+                                            <h4>{{ Auth::user()->nama }}</h4>
+                                            {{-- <p class="text-muted">hello@example.com</p><a href="profile.html"
+                                                class="btn btn-rounded btn-danger btn-sm">View Profile</a> --}}
                                         </div>
                                     </div>
                                 </li>
@@ -107,11 +105,10 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profil</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Logout</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-lock"></i> Logout</a>
                                 </li>
                             </ul>
                         </li>
-
                     </ul>
                 </div>
             </nav>
@@ -119,7 +116,6 @@
         </div>
         <!-- Sidebar -->
         <div class="sidebar">
-
             <div class="sidebar-wrapper scrollbar-inner">
                 <div class="sidebar-content">
                     <div class="user">
@@ -129,7 +125,7 @@
                         <div class="info">
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                                 <span>
-                                    Hizrian
+                                    {{ Auth::user()->nama }}
                                     <span class="user-level">Administrator</span>
                                 </span>
                             </a>
@@ -138,7 +134,7 @@
                     </div>
                     <ul class="nav">
                         <li class="nav-item">
-                            <a href="../index.html">
+                            <a href="/home">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                                 <span class="badge badge-count">5</span>
@@ -153,14 +149,20 @@
                         <li class="nav-item">
                             <a data-toggle="collapse" href="#base">
                                 <i class="fas fa-layer-group"></i>
-                                <p>Base</p>
+                                <p>Data Master</p>
                                 <span class="caret"></span>
                             </a>
                             <div class="collapse" id="base">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        <a href="#">
-                                            <span class="sub-item">Typography</span>
+                                        <a href="/user">
+                                            <span class="sub-item">Data User</span>
+                                        </a>
+                                        <a href="/kategori">
+                                            <span class="sub-item">Data Kategori</span>
+                                        </a>
+                                        <a href="/barang">
+                                            <span class="sub-item">Data Barang</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -171,7 +173,6 @@
             </div>
         </div>
         @yield('content')
-
     </div>
     <!--   Core JS Files   -->
     <script src="/assets/js/core/jquery.3.2.1.min.js"></script>
@@ -201,3 +202,4 @@
 </body>
 
 </html>
+@include('sweetalert::alert')

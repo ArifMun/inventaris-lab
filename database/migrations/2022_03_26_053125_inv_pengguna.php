@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class InvKategori extends Migration
+class InvPengguna extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class InvKategori extends Migration
      */
     public function up()
     {
-        Schema::create('inv_kategori', function (Blueprint $table) {
+        Schema::create('inv_pengguna', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('nama_kategori');
+            $table->integer('id_akun');
+            $table->string('nama');
+            $table->string('jabatan');
         });
     }
 
@@ -26,6 +28,6 @@ class InvKategori extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inv_kategori');
+        //
     }
 }

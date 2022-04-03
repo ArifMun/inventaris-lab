@@ -14,12 +14,11 @@ class InvAkun extends Migration
     public function up()
     {
         Schema::create('inv_akun', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama')->nullable();
+            $table->integer('id')->autoIncrement();
             $table->string('username');
             $table->string('password')->unique();
             $table->enum('level',['admin','superadmin']);
-            $table->timestamps();
+            $table->string('ip_login');
         });
     }
 

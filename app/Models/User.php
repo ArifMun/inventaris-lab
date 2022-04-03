@@ -17,10 +17,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $timestamps = false;
+    protected $table = 'inv_akun';
+    // protected $guarded = ['ip_login'];
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
+        'level',
+        'ip_login',
+        // 'created_at',
+        // 'updated_at'
     ];
 
     /**
@@ -31,6 +37,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        
     ];
 
     /**
@@ -38,7 +45,7 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+    // const CREATED_AT = 'created_at';
+    // const UPDATED_AT = 'updated_at';
 }
