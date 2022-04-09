@@ -17,11 +17,12 @@ class InvBarang extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('no_barang');
             $table->string('nama_barang');
-            $table->integer('kategori');
+            $table->string('kategori');
+            // $table->foreignId('id_akun');
             $table->integer('jumlah');
             $table->enum('penulis',['admin','superadmin']);
             $table->text('keterangan');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

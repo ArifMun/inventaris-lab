@@ -48,6 +48,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>Username</th>
                                             <th>Level</th>
                                             <th>Action</th>
                                             <th>ip</th>
@@ -63,6 +64,7 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $row->nama }}</td>
+                                            <td>{{ $row->username }}</td>
                                             <td>{{ $row->level }}</td>
                                             <td>
                                                 <a href="#editDataUser{{ $row->id}}" data-toggle="modal"
@@ -86,6 +88,7 @@
     </div>
 </div>
 
+{{-- Tambah --}}
 <div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -135,6 +138,8 @@
     </div>
 </div>
 
+{{-- edit --}}
+
 @foreach ($user as $d)
 <div class="modal fade" id="editDataUser{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
@@ -154,47 +159,47 @@
 
                     <input type="hidden" value="{{ $d->id }}" name="id" required>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label>Nama Lengkap</label>
                         <input type="text" value="{{ $d->nama }}" class="form-control" name="nama"
-                            placeholder="Nama Lengkap ..">
-                    </div>
+                    placeholder="Nama Lengkap ..">
+                </div> --}}
 
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" value="{{ $d->username }}" class="form-control" name="username"
-                            placeholder="Username ..">
-                    </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" value="{{ $d->username }}" class="form-control" name="username"
+                        placeholder="Username ..">
+                </div>
 
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="text" class="form-control" name="password" placeholder="Password ..">
-                    </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="text" class="form-control" name="password" placeholder="Password ..">
+                </div>
 
-                    <div class="form-group">
-                        <label>level</label>
-                        <select class="form-control" name="level" required>
+                <div class="form-group">
+                    <label>level</label>
+                    <select class="form-control" name="level" required>
 
-                            {{-- @if (old('level',$d->level) == $d->level)
+                        {{-- @if (old('level',$d->level) == $d->level)
                             <option value="{{ $d->level }}" selected>{{ $d->level }}</option>
-                            @endif --}}
-                            <option <?php if( $d->level =="admin" ) echo "selected" ; ?> value="admin">Admin
-                            </option>
-                            <option <?php if( $d->level =="superadmin" ) echo "selected" ; ?> value="superadmin">
-                                Super
-                                Admin</option>
-                        </select>
-                    </div>
+                        @endif --}}
+                        <option <?php if( $d->level =="admin" ) echo "selected" ; ?> value="admin">Admin
+                        </option>
+                        <option <?php if( $d->level =="superadmin" ) echo "selected" ; ?> value="superadmin">
+                            Super
+                            Admin</option>
+                    </select>
                 </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i>
-                        Tutup</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
-                </div>
-            </form>
         </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i>
+                Tutup</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+        </div>
+        </form>
     </div>
+</div>
 </div>
 @endforeach
 

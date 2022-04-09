@@ -33,11 +33,16 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Tambah Barang</h4>
-                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-                                    data-target="#modalAddUser">
+                                {{-- <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
+                                    data-target="#modalAddBarang">
                                     <i class="fa fa-plus"></i>
                                     Tambah Barang
-                                </button>
+                                </button> --}}
+                                <a href="/barang/create" class="btn btn-primary btn-round ml-auto" data-toggle="modal"
+                                    data-target="#modalAddBarang">
+                                    <i class="fa fa-plus"></i>
+                                    Tambah Barang
+                                </a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -67,15 +72,15 @@
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $row->no_barang }}</td>
                                             <td>{{ $row->nama_barang }}</td>
-                                            <td>{{ $row->Kategori }}</td>
+                                            <td>{{ $row->nama_kategori }}</td>
                                             <td>{{ $row->penulis }}</td>
                                             <td>{{ $row->jumlah }}</td>
-                                            <td>{{ $row->Keterangan }}</td>
+                                            <td>{{ substr($row->keterangan,0,5) }}..</td>
                                             <td>
-                                                <a href="#editDataUser{{ $row->id}}" data-toggle="modal"
+                                                <a href="#editDataBarang{{ $row->id }}" data-toggle="modal"
                                                     class="btn btn-primary btn-xs"><i class="fa fa-edit">
                                                     </i> Edit</a>
-                                                <a href="#modalHapusUser{{ $row->id }}" data-toggle="modal"
+                                                <a href="#modalHapusBarang{{ $row->id }}" data-toggle="modal"
                                                     class="btn btn-danger btn-xs"><i class="fa fa-trash">
                                                     </i> Hapus</a>
                                             </td>
@@ -93,7 +98,7 @@
 </div>
 
 {{-- Tambah --}}
-<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade" id="modalAddBarang" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -107,34 +112,40 @@
             <form method="POST" enctype="multipart/form-data" action="/barang/store">
                 @csrf
                 <div class="modal-body">
+                    <input type="hidden" value="{{ Auth::user()->id }}">
+
                     <div class="form-group">
-                        <label>No Barang</label>
-                        <input type="text" class="form-control" name="no_baranga" placeholder="No Barang ..">
+                        <div class="row">
+                            <div class="col">
+                                <label>Kategori</label>
+                                <select class="form-control" name="kategori" onchange="no_kategori()" id="kategori"
+                                    required>
+                                    <option value="" hidden="">-- Pilih Kategori --</option>
+                                    @foreach ($kategori as $k)
+                                    <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label>Kode Kategori</label>
+                                <input type="text" class="form-control" name="kode_kategori" id="kode_kategori"
+                                    readonly>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Nama Barang</label>
-                        <input type="text" class="form-control" name="nama_barang" placeholder="Nama Barang ..">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Kategori</label>
-                        <select class="form-control" name="kategori" required>
-                            <option value="" hidden="">-- Pilih Kategori --</option>
-                            @foreach ($kategori as $k)
-                            <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>
-                            @endforeach
-                        </select>
-                        {{-- <input type="text" class="form-control" name="kategori" placeholder="Kategori .."> --}}
-                    </div>
-
-                    <div class="form-group">
-                        <label>Penulis</label>
-                        <select name="penulis" required class="form-control">
-                            <option value="" hidden>-- Pilih Penulis --</option>
-                            <option value="admin">Admin</option>
-                            <option value="superadmin">Super Admin</option>
-                        </select>
+                        <div class="row">
+                            <div class="col">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" name="nama_barang" placeholder="Nama Barang ..">
+                            </div>
+                            <div class="col">
+                                <label>Penulis</label>
+                                <input type="text" class="form-control" name="penulis" value="{{ Auth::user()->level }}"
+                                    placeholder="{{ Auth::user()->level }}" readonly>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -144,7 +155,7 @@
 
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <input type="text" class="form-control" name="keteranga" placeholder="Keterangan ..">
+                        <input type="text" class="form-control" name="keterangan" placeholder="Keterangan ..">
                     </div>
                 </div>
 
@@ -160,7 +171,7 @@
 
 {{-- Edit --}}
 @foreach ($barang as $d)
-<div class="modal fade" id="editDataUser{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div class="modal fade" id="editDataBarang{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -175,59 +186,64 @@
 
                 @csrf
                 <div class="modal-body">
-
-                    <input type="hidden" value="{{ $d->id }}" name="id" required>
-
+                    <input type="hidden" value="{{ Auth::user()->id }}">
+                    <input type="hidden" value="{{ $d->no_barang }}" name="no_barang">
                     <div class="form-group">
-                        <label>No Barang</label>
-                        <input type="text" value="{{ $d->no_barang }}" class="form-control" name="no_baranga"
-                            placeholder="No Barang ..">
+                        <div class="row">
+                            <div class="col">
+                                <label>Kategori</label>
+                                <select class="form-control" name="kategori" required>
+                                    @foreach ($kategori as $k)
+
+                                    @if (old('kategori',$d->kategori) == $k->id)
+                                    <option value="{{  $d->kategori }}" selected>{{ $k->nama_kategori }}</option>
+                                    @else
+                                    <option value="{{  $d->kategori }}" disabled>{{ $k->nama_kategori }}</option>
+                                    @endif
+
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label>No Barang</label>
+                                <input type="text" class="form-control" value="{{ $d->no_barang }}" name="kode_kategori"
+                                    id="kode_kategori" readonly>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Nama Barang</label>
-                        <input type="text" value="{{ $d->nama_barang }}" class="form-control" name="nama_barang"
-                            placeholder="Nama Barang ..">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Kategori</label>
-                        <input type="text" value="{{ $d->kategori }}" class="form-control" name="kategori"
-                            placeholder="Kategori ..">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Penulis</label>
-                        <select class="form-control" name="level" required>
-
-                            {{-- @if (old('level',$d->level) == $d->level)
-                            <option value="{{ $d->level }}" selected>{{ $d->level }}</option>
-                            @endif --}}
-                            <option <?php if( $d->penulis =="admin" ) echo "selected" ; ?> value="admin">Admin
-                            </option>
-                            <option <?php if( $d->penulis =="superadmin" ) echo "selected" ; ?> value="superadmin">
-                                Super
-                                Admin</option>
-                        </select>
+                        <div class="row">
+                            <div class="col">
+                                <label>Nama Barang</label>
+                                <input type="text" class="form-control" value="{{ old('nama_barang',$d->nama_barang) }}"
+                                    name="nama_barang" placeholder="Nama Barang .." required>
+                            </div>
+                            <div class="col">
+                                <label>Penulis</label>
+                                <input type="text" class="form-control" name="penulis" value="{{ Auth::user()->level }}"
+                                    placeholder="{{ Auth::user()->level }}" readonly>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="text" value="jumlah" class="form-control" name="jumlah" placeholder="Jumlah ..">
+                        <input type="text" class="form-control" name="jumlah" placeholder="Jumlah .."
+                            value="{{ old('jumlah',$d->jumlah) }}" required>
                     </div>
 
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <input type="text" value="keterangan" class="form-control" name="keterangan"
-                            placeholder="Jumlah ..">
+                        <input type="text" class="form-control" name="keterangan" placeholder="Keterangan .."
+                            value="{{ old('jumlah',$d->keterangan) }}">
                     </div>
-
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i>
-                        Tutup</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo">
+                        </i> Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"> </i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -236,9 +252,9 @@
 @endforeach
 
 {{-- Hapus --}}
-@foreach ($barang as $g)
-<div class="modal fade" id="modalHapusUser{{ $g->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
+@foreach ($barang as $d)
+<div class="modal fade" id="modalHapusBarang{{ $d->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-open">
         <div class="modal-content">
             <div class="modal-header">
@@ -248,7 +264,7 @@
                 </button>
             </div>
 
-            <form method="GET" enctype="multipart/form-data" action="/barang/{{ $g->id }}/destroy">
+            <form method="GET" enctype="multipart/form-data" action="/barang/{{ $d->id }}/destroy">
 
                 @csrf
                 <div class="modal-body">
@@ -271,5 +287,32 @@
     </div>
 </div>
 @endforeach
+<script src="/assets/js/core/jquery.3.2.1.min.js"></script>
+<script>
+    function no_kategori() {
+        let kategori = $("#kategori").val();
+        $("#kode_kategori").children().remove();
+        if (kategori != '' && kategori != null) {
+            $.ajax({
+
+                url: "{{ url('') }}/barang/kode_kategori/" + kategori,
+                success: function (res) {
+                    $("#kode_kategori").val(res.kode_kategori);
+                }
+            });
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content');
+        }
+    })
+
+</script>
+
 {{-- @include('sweetalert::alert') --}}
 @endsection

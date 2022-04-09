@@ -15,9 +15,9 @@ class InvPengguna extends Migration
     {
         Schema::create('inv_pengguna', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->integer('id_akun');
+            $table->integer('id_akun')->nullable();
             $table->string('nama');
-            $table->string('jabatan');
+            $table->string('jabatan')->nullable();
         });
     }
 

@@ -16,6 +16,7 @@ class InvKategori extends Migration
         Schema::create('inv_kategori', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->string('nama_kategori');
+            $table->string('kode_kategori')->unique();
         });
     }
 

@@ -18,7 +18,7 @@ class InvAkun extends Migration
             $table->string('username');
             $table->string('password')->unique();
             $table->enum('level',['admin','superadmin']);
-            $table->string('ip_login');
+            $table->string('ip_login')->nullable();
         });
     }
 

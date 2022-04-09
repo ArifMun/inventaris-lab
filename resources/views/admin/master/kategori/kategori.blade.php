@@ -32,11 +32,11 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Tambah Data</h4>
+                                <h4 class="card-title">Tambah Kategori</h4>
                                 <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-                                    data-target="#modalAddUser">
+                                    data-target="#modalAddKategori">
                                     <i class="fa fa-plus"></i>
-                                    Tambah Data
+                                    Tambah Kategori
                                 </button>
                             </div>
                         </div>
@@ -48,6 +48,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Kategori</th>
+                                            <th>Kode Kategori</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -61,11 +62,12 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $row->nama_kategori }}</td>
+                                            <td>{{ $row->kode_kategori }}</td>
                                             <td>
-                                                <a href="#editDataUser{{ $row->id}}" data-toggle="modal"
+                                                <a href="#editDataKategori{{ $row->id}}" data-toggle="modal"
                                                     class="btn btn-primary btn-xs"><i class="fa fa-edit">
                                                     </i> Edit</a>
-                                                <a href="#modalHapusUser{{ $row->id }}" data-toggle="modal"
+                                                <a href="#modalHapusKategori{{ $row->id }}" data-toggle="modal"
                                                     class="btn btn-danger btn-xs"><i class="fa fa-trash">
                                                     </i> Hapus</a>
                                             </td>
@@ -82,12 +84,13 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalAddUser" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+{{-- Tambah --}}
+<div class="modal fade" id="modalAddKategori" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Kategori</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Tambah kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -96,28 +99,37 @@
             <form method="POST" enctype="multipart/form-data" action="/kategori/store">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Nama Kategori</label>
-                        <input type="text" class="form-control" name="nama_kategori" placeholder="Nama Kategori ..">
+
+                    <div class=" form-group">
+                        <label>Nama kategori</label>
+                        <input type="text" class="form-control" name="nama_kategori" placeholder="Nama kategori ..">
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo">
-                            </i> Kembali</button>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"> </i> Simpan</button>
+                    <div class="form-group">
+                        <label>Kode Kategori</label>
+                        <input type="text" class="form-control" name="kode_kategori" placeholder="Kode kategori ..">
                     </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo">
+                        </i> Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"> </i> Simpan</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
+{{-- Edit --}}
 @foreach ($kategori as $d)
-<div class="modal fade" id="editDataUser{{ $d->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="editDataKategori{{ $d->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Edit Kategori</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -133,7 +145,13 @@
                     <div class="form-group">
                         <label>Nama kategori</label>
                         <input type="text" value="{{ $d->nama_kategori }}" class="form-control" name="nama_kategori"
-                            placeholder="Nama Lengkap ..">
+                            placeholder="Nama kategori ..">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kode kategori</label>
+                        <input type="text" value="{{ $d->kode_kategori }}" class="form-control" name="kode_kategori"
+                            placeholder="Kode kategori ..">
                     </div>
                 </div>
 
@@ -149,19 +167,19 @@
 @endforeach
 
 {{-- Hapus --}}
-@foreach ($kategori as $g)
-<div class="modal fade" id="modalHapusUser{{ $g->id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
+@foreach ($kategori as $d)
+<div class="modal fade" id="modalHapusKategori{{ $d->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-open">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLongTitle">Hapus Kategori</h3>
+                <h3 class="modal-title" id="exampleModalLongTitle">Hapus kategori</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <form method="GET" enctype="multipart/form-data" action="/kategori/{{ $g->id }}/destroy">
+            <form method="GET" enctype="multipart/form-data" action="/kategori/{{ $d->id }}/destroy">
 
                 @csrf
                 <div class="modal-body">
@@ -184,5 +202,6 @@
     </div>
 </div>
 @endforeach
+
 {{-- @include('sweetalert::alert') --}}
 @endsection

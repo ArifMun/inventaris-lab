@@ -42,9 +42,9 @@
         <div class="main-header" data-background-color="purple">
             <!-- Logo Header -->
             <div class="logo-header">
-                <a href="#" class="logo">
+                {{-- <a href="#" class="logo">
                     <img src="/assets/img/logoazzara.svg" alt="navbar brand" class="navbar-brand">
-                </a>
+                </a> --}}
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                     data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
@@ -125,7 +125,7 @@
                         <div class="info">
                             <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                                 <span>
-                                    {{ Auth::user()->nama }}
+                                    {{ Auth::user()->level }}
                                     <span class="user-level">Administrator</span>
                                 </span>
                             </a>
@@ -155,8 +155,9 @@
                             <div class="collapse" id="base">
                                 <ul class="nav nav-collapse">
                                     <li>
+                                        @if (Auth::user()->level == 'admin' || 'superadmin')
                                         <a href="/user">
-                                            <span class="sub-item">Data User</span>
+                                            <span class="sub-item"> Data User</span>
                                         </a>
                                         <a href="/kategori">
                                             <span class="sub-item">Data Kategori</span>
@@ -164,6 +165,7 @@
                                         <a href="/barang">
                                             <span class="sub-item">Data Barang</span>
                                         </a>
+                                        @endif
                                     </li>
                                 </ul>
                             </div>
