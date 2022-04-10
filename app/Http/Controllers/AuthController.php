@@ -35,14 +35,14 @@ class AuthController extends Controller
                     // if($user->id == 1){
                     //     $ip;
                     // }else if($user->id == 2)
-                    return redirect()->intended('admin')->with('success','Anda Berhasil Login');
+                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Login');
                     
                 } else if ($user->level == 'superadmin') {
                     DB::table('inv_akun')
                         ->update([
                         'ip_login' => $request->getClientIp()
                     ]);
-                    return redirect()->intended('superadmin')->with('success','Anda Berhasil Login');
+                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Login');
                 }
                 return redirect()->intended('/');
             }

@@ -6,6 +6,7 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,19 +24,23 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/logout',[AuthController::class, 'logout']);
 
 // Route::group(['middleware']) 
-Route::get('login', [AuthController::class, 'index'])->name('index');
+Route::get('login', [AuthController::class, 'index'])->name('login');
 // Route::get('register', 'App\Http\Controllers\AuthController@register')->name('register');
 Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 
-Route::group(['middlewere' => ['auth','CheckLevel:admin']], function(){
-    Route::resource('admin', AkunController::class);
+Route::group(['middleware' => ['auth', 'CheckLevel:admin,superadmin']], function(){
+    
+    Route::get('dashboard', [AkunController::class, 'index']);
+    // Route::resource('admin', AkunController::class);
      // Data master (User)
-     Route::get('user', [UserController::class, 'index']);
-     Route::post('/user/store', [UserController::class, 'store']);
-     Route::post('/user/{id}/update', [UserController::class, 'update']);
-     Route::get('/user/{id}/destroy', [UserController::class, 'destroy']);
+    Route::get('user', [UserController::class, 'index']);
+    // Route::get('/search',[SearchController::class, 'search']);
+    Route::get('/user/search',[UserController::class, 'search']);
+    Route::post('/user/store', [UserController::class, 'store']);
+    Route::post('/user/{id}/update', [UserController::class, 'update']);
+    Route::get('/user/{id}/destroy', [UserController::class, 'destroy']);
 
 
      // Data master (Kategori)
@@ -47,19 +52,25 @@ Route::group(['middlewere' => ['auth','CheckLevel:admin']], function(){
 
      // Data master (Barang)
      Route::get('barang', [BarangController::class, 'index']);
+     Route::get('/barang/search',[BarangController::class, 'search']);
      Route::post('/barang/store', [BarangController::class, 'store']);
      Route::get('/barang/create', [BarangController::class, 'create']);
      Route::post('/barang/{id}/update', [BarangController::class, 'update']);
+     Route::get('/barang/{id}/destroy', [BarangController::class, 'destroy']);
      Route::get('/barang/kode_kategori/{id} ', [BarangController::class, 'autofill']);
     //  Route::get('/barang/no_barang/{id} ', [BarangController::class, 'autofillBarang']);
-     Route::get('/barang/{id}/destroy', [BarangController::class, 'destroy']);
 });
 
-Route::group(['middlewere' => ['auth','CheckLevel:superadmin']], function(){
-    Route::resource('superadmin', AkunController::class);
-     // Data master (User)
-     Route::resource('user', UserController::class);
-     Route::resource('kategori', KategoriController::class);
-     Route::resource('barang', BarangController::class);
+// Route::group(['middleware' => ['auth', 'CheckLevel:superadmin']], function(){
+//     Route::resource('superadmin', AkunController::class);
+//      // Data master (User)
+//     //  Route::resource('user', UserController::class);
+//     //  Route::resource('kategori', KategoriController::class);
+//     //  Route::resource('barang', BarangController::class);
+
+//     Route::get('user', [SuperAdminController::class, 'index']);
+//     Route::post('/user/store', [SuperAdminController::class, 'store']);
+//     Route::post('/user/{id}/update', [SuperAdminController::class, 'update']);
+//     Route::get('/user/{id}/destroy', [SuperAdminController::class, 'destroy']);
     
-});
+// });

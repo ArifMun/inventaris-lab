@@ -13,12 +13,28 @@ class BarangController extends Controller
 {
     public function index()
     {
+        // dd(request('search'));
         $barang = Barang::join('inv_kategori','inv_kategori.id','=','inv_barang.kategori')
                 ->select('inv_barang.*','inv_kategori.nama_kategori')
                 ->get()
                 ->sortDesc();
 
         $kategori = Kategori::all();
+        return view('admin.master.barang.barang',compact('barang','kategori'));
+    }
+
+    public function search(Request $request){
+		$search = $request->search;
+        $barang = Barang::join('inv_kategori','inv_kategori.id','=','inv_barang.kategori')
+        ->select('inv_barang.*','inv_kategori.nama_kategori')
+        ->where('nama_barang','like',"%".$search."%")
+        ->paginate();
+ 
+        $kategori = Kategori::all();
+        // $barang = DB::table('inv_barang')
+        // ->where('nama_barang','like',"%".$search."%")
+        // ->paginate();
+
         return view('admin.master.barang.barang',compact('barang','kategori'));
     }
 

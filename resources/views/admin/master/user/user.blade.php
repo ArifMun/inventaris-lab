@@ -26,6 +26,18 @@
                         <a href="#">Pengguna</a>
                     </li>
                 </ul>
+                <div class="collapse ml-auto" id="search-nav">
+                    <form class="navbar-left navbar-form nav-search mr-md-3" action="/user/search" method="GET">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-search pr-1" value="search">
+                                    <i class="fa fa-search search-icon"></i>
+                                </button>
+                            </div>
+                            <input type="text" placeholder="Search ..." class="form-control" name="search" id="search">
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -63,7 +75,7 @@
 
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $row->nama }}</td>
+                                            {{-- <td>{{ $row->nama }}</td> --}}
                                             <td>{{ $row->username }}</td>
                                             <td>{{ $row->level }}</td>
                                             <td>

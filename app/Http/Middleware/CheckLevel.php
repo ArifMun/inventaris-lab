@@ -15,16 +15,20 @@ class CheckLevel
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $roles)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
         if(!Auth::check()){
-            return redirect('login');
+            return redirect('login')->with('warning',"kamu ga punya akses");;
         }
         $user = Auth::user();
 
-        if ($user->level == $roles) {
+        //agar level bisa lebih dari satu yang dapat dimasukkan pada 1 route group
+        if (in_array($user->level,$roles)) {
             return $next($request);
         }
-        return redirect('login')->with('error',"kamu ga punya akses");
+        // if (auth()->guest() || !auth()->user()->is_admin) {
+        //     abort(403);
+        // }
+        
     }
 }

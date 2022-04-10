@@ -26,6 +26,18 @@
                         <a href="#">Barang</a>
                     </li>
                 </ul>
+                <div class="collapse ml-auto" id="search-nav">
+                    <form class="navbar-left navbar-form nav-search mr-md-3" action="/barang/search" method="GET">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-search pr-1" value="search">
+                                    <i class="fa fa-search search-icon"></i>
+                                </button>
+                            </div>
+                            <input type="text" placeholder="Search ..." class="form-control" name="search" id="search">
+                        </div>
+                    </form>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -138,19 +150,20 @@
                         <div class="row">
                             <div class="col">
                                 <label>Nama Barang</label>
-                                <input type="text" class="form-control" name="nama_barang" placeholder="Nama Barang ..">
+                                <input type="text" class="form-control" name="nama_barang" placeholder="Nama Barang .."
+                                    required>
                             </div>
                             <div class="col">
                                 <label>Penulis</label>
                                 <input type="text" class="form-control" name="penulis" value="{{ Auth::user()->level }}"
-                                    placeholder="{{ Auth::user()->level }}" readonly>
+                                    readonly>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <input type="text" class="form-control" name="jumlah" placeholder="Jumlah ..">
+                        <input type="text" class="form-control" name="jumlah" placeholder="Jumlah .." required>
                     </div>
 
                     <div class="form-group">
@@ -313,6 +326,23 @@
     })
 
 </script>
+<script type="text/javascript">
+    $('#search').on('keyup', function () {
+        $value = $(this).val();
 
+        $.ajax({
+            type: 'get',
+            url: '{{URL::to('
+            search ')}}',
+            data: {
+                'search': $value
+            },
+            success: function (data) {
+                $('tbody').html(data);
+            }
+        });
+    })
+
+</script>
 {{-- @include('sweetalert::alert') --}}
 @endsection

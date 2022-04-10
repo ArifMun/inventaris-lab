@@ -63,18 +63,19 @@
             <!-- Navbar Header -->
             <nav class="navbar navbar-header navbar-expand-lg">
                 <div class="container-fluid">
-                    <div class="collapse" id="search-nav">
+                    {{-- <div class="collapse" id="search-nav">
                         <form class="navbar-left navbar-form nav-search mr-md-3">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button type="submit" class="btn btn-search pr-1">
+                                    <button type="submit" class="btn btn-search pr-1" value="search">
                                         <i class="fa fa-search search-icon"></i>
                                     </button>
                                 </div>
-                                <input type="text" placeholder="Search ..." class="form-control">
+                                <input type="text" placeholder="Search ..." class="form-control" name="search"
+                                    id="search">
                             </div>
                         </form>
-                    </div>
+                    </div> --}}
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                         <li class="nav-item toggle-nav-search hidden-caret">
                             <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button"
@@ -134,7 +135,7 @@
                     </div>
                     <ul class="nav">
                         <li class="nav-item">
-                            <a href="/home">
+                            <a href="/dashboard">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                                 <span class="badge badge-count">5</span>
@@ -144,7 +145,7 @@
                             <span class="sidebar-mini-icon">
                                 <i class="fa fa-ellipsis-h"></i>
                             </span>
-                            <h4 class="text-section">Components</h4>
+                            <h4 class="text-section">Administrator</h4>
                         </li>
                         <li class="nav-item">
                             <a data-toggle="collapse" href="#base">
@@ -155,9 +156,9 @@
                             <div class="collapse" id="base">
                                 <ul class="nav nav-collapse">
                                     <li>
-                                        @if (Auth::user()->level == 'admin' || 'superadmin')
+                                        @if (Auth::user()->level == 'admin'||'superadmin')
                                         <a href="/user">
-                                            <span class="sub-item"> Data User</span>
+                                            <span class="sub-item">Data User</span>
                                         </a>
                                         <a href="/kategori">
                                             <span class="sub-item">Data Kategori</span>
@@ -201,7 +202,8 @@
         });
 
     </script>
+
 </body>
 
 </html>
-@include('sweetalert::alert')
+{{-- @include('sweetalert::alert') --}}

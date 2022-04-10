@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     
@@ -15,6 +16,20 @@ class UserController extends Controller
         // $user = User::orderBy('id','desc')->paginate(10);
         $user = User::get()->sortDesc();
         return view('admin.master.user.user',compact('user'));
+    }
+
+    public function search(Request $request){
+        // menangkap data pencarian
+		$search = $request->search;
+ 
+        // mengambil data dari table pegawai sesuai pensearchan data
+        $user = DB::table('inv_akun')
+        ->where('username','like',"%".$search."%")
+        // ->orWhere('nama','like',"%".$search."%")
+        ->paginate();
+
+        // mengirim data user ke view index
+        return view('admin.master.user.user',['user' => $user]);
     }
 
     public function store(Request $request)

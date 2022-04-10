@@ -41,6 +41,14 @@ class User extends Authenticatable
         
     ];
 
+    // public function scopeFilter($query, array $filters){
+    //     return $query->where('username', '==', 'admin');
+    // $query->when($filters['search'] ?? false,function($query, $search){
+    //     return $query->where('username','like','%' . $search . '%')
+    //                 ->orWhere('nama','like','%'. $search . '%');
+    // });
+
+    // }
     // public function identitas(){
     //     return $this->hasMany(Identitas::class);
     // }

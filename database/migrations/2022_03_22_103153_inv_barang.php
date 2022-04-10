@@ -21,7 +21,7 @@ class InvBarang extends Migration
             // $table->foreignId('id_akun');
             $table->integer('jumlah');
             $table->enum('penulis',['admin','superadmin']);
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             // $table->timestamps();
         });
     }

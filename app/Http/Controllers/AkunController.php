@@ -15,7 +15,7 @@ class AkunController extends Controller
     {
         
         $user = User::all();
-        return view('home',compact('user'));
+        return view('admin.dashboard.dashboard',compact('user'));
     }
 
     /**
