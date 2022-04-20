@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('admin.layout.layout')
 
 @section('content')
 
@@ -7,37 +7,6 @@
         <div class="page-inner">
             <div class="page-header">
                 <h4 class="page-title">Data Barang</h4>
-                <ul class="breadcrumbs">
-                    <li class="nav-home">
-                        <a href="#">
-                            <i class="flaticon-home"></i>
-                        </a>
-                    </li>
-                    <li class="separator">
-                        <i class="flaticon-right-arrow"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Data</a>
-                    </li>
-                    <li class="separator">
-                        <i class="flaticon-right-arrow"></i>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#">Barang</a>
-                    </li>
-                </ul>
-                <div class="collapse ml-auto" id="search-nav">
-                    <form class="navbar-left navbar-form nav-search mr-md-3" action="/barang/search" method="GET">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button type="submit" class="btn btn-search pr-1" value="search">
-                                    <i class="fa fa-search search-icon"></i>
-                                </button>
-                            </div>
-                            <input type="text" placeholder="Search ..." class="form-control" name="search" id="search">
-                        </div>
-                    </form>
-                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -45,11 +14,6 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Tambah Barang</h4>
-                                {{-- <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-                                    data-target="#modalAddBarang">
-                                    <i class="fa fa-plus"></i>
-                                    Tambah Barang
-                                </button> --}}
                                 <a href="/barang/create" class="btn btn-primary btn-round ml-auto" data-toggle="modal"
                                     data-target="#modalAddBarang">
                                     <i class="fa fa-plus"></i>
@@ -69,6 +33,7 @@
                                             <th>Kategori</th>
                                             <th>Penulis</th>
                                             <th>Jumlah</th>
+                                            <th>Unit</th>
                                             <th>Keterangan</th>
                                             <th>Action</th>
                                         </tr>
@@ -87,6 +52,7 @@
                                             <td>{{ $row->nama_kategori }}</td>
                                             <td>{{ $row->penulis }}</td>
                                             <td>{{ $row->jumlah }}</td>
+                                            <td>{{ $row->unit }}</td>
                                             <td>{{ substr($row->keterangan,0,5) }}..</td>
                                             <td>
                                                 <a href="#editDataBarang{{ $row->id }}" data-toggle="modal"
@@ -162,8 +128,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Jumlah</label>
-                        <input type="text" class="form-control" name="jumlah" placeholder="Jumlah .." required>
+                        <div class="row">
+                            <div class="col">
+                                <label>Jumlah</label>
+                                <input type="text" class="form-control" name="jumlah" placeholder="Jumlah .." required>
+                            </div>
+                            <div class="col">
+                                <label>Unit</label>
+                                <input type="text" class="form-control" name="unit" placeholder="Unit .." required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -241,9 +215,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Jumlah</label>
-                        <input type="text" class="form-control" name="jumlah" placeholder="Jumlah .."
-                            value="{{ old('jumlah',$d->jumlah) }}" required>
+                        <div class="row">
+                            <div class="col">
+                                <label>Jumlah</label>
+                                <input type="text" class="form-control" name="jumlah" placeholder="Jumlah .."
+                                    value="{{ old('jumlah',$d->jumlah) }}" required>
+                            </div>
+                            <div class="col">
+                                <label>Unit</label>
+                                <input type="text" class="form-control" name="unit" placeholder="Unit .." required
+                                    value="{{ old('unit',$d->unit) }}">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -302,6 +285,8 @@
 @endforeach
 <script src="/assets/js/core/jquery.3.2.1.min.js"></script>
 <script>
+    // nama function harus dibedakan dari nama id
+    // pada form input
     function no_kategori() {
         let kategori = $("#kategori").val();
         $("#kode_kategori").children().remove();
@@ -323,24 +308,6 @@
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content');
         }
-    })
-
-</script>
-<script type="text/javascript">
-    $('#search').on('keyup', function () {
-        $value = $(this).val();
-
-        $.ajax({
-            type: 'get',
-            url: '{{URL::to('
-            search ')}}',
-            data: {
-                'search': $value
-            },
-            success: function (data) {
-                $('tbody').html(data);
-            }
-        });
     })
 
 </script>

@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('admin.layout.layout')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="page-inner">
             <div class="page-header">
                 <h4 class="page-title">Data Pengguna</h4>
-                <ul class="breadcrumbs">
+                {{-- <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
                             <i class="flaticon-home"></i>
@@ -25,19 +25,7 @@
                     <li class="nav-item">
                         <a href="#">Pengguna</a>
                     </li>
-                </ul>
-                <div class="collapse ml-auto" id="search-nav">
-                    <form class="navbar-left navbar-form nav-search mr-md-3" action="/user/search" method="GET">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button type="submit" class="btn btn-search pr-1" value="search">
-                                    <i class="fa fa-search search-icon"></i>
-                                </button>
-                            </div>
-                            <input type="text" placeholder="Search ..." class="form-control" name="search" id="search">
-                        </div>
-                    </form>
-                </div>
+                </ul> --}}
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -60,6 +48,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>Jabatan</th>
+                                            <th>No Induk</th>
                                             <th>Username</th>
                                             <th>Level</th>
                                             <th>Action</th>
@@ -75,7 +65,9 @@
 
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            {{-- <td>{{ $row->nama }}</td> --}}
+                                            <td>{{ $row->nama }}</td>
+                                            <td>{{ $row->jabatan }}</td>
+                                            <td>{{ $row->no_induk }}</td>
                                             <td>{{ $row->username }}</td>
                                             <td>{{ $row->level }}</td>
                                             <td>
@@ -118,6 +110,16 @@
                     <div class="form-group">
                         <label>Nama Lengkap</label>
                         <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap ..">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jabatan</label>
+                        <input type="text" class="form-control" name="jabatan" placeholder="Jabatan ..">
+                    </div>
+
+                    <div class="form-group">
+                        <label>No induk</label>
+                        <input type="text" class="form-control" name="no_induk" placeholder="No induk ..">
                     </div>
 
                     <div class="form-group">
@@ -171,47 +173,59 @@
 
                     <input type="hidden" value="{{ $d->id }}" name="id" required>
 
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label>Nama Lengkap</label>
                         <input type="text" value="{{ $d->nama }}" class="form-control" name="nama"
-                    placeholder="Nama Lengkap ..">
-                </div> --}}
+                            placeholder="Nama Lengkap ..">
+                    </div>
 
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" value="{{ $d->username }}" class="form-control" name="username"
-                        placeholder="Username ..">
-                </div>
+                    <div class="form-group">
+                        <label>Jabatan</label>
+                        <input type="text" value="{{ $d->jabatan }}" class="form-control" name="jabatan"
+                            placeholder="Jabatan ..">
+                    </div>
 
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" class="form-control" name="password" placeholder="Password ..">
-                </div>
+                    <div class="form-group">
+                        <label>No induk</label>
+                        <input type="text" value="{{ $d->no_induk }}" class="form-control" name="no_induk"
+                            placeholder="No induk ..">
+                    </div>
 
-                <div class="form-group">
-                    <label>level</label>
-                    <select class="form-control" name="level" required>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" value="{{ $d->username }}" class="form-control" name="username"
+                            placeholder="Username ..">
+                    </div>
 
-                        {{-- @if (old('level',$d->level) == $d->level)
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="text" class="form-control" name="password" placeholder="Password ..">
+                    </div>
+
+                    <div class="form-group">
+                        <label>level</label>
+                        <select class="form-control" name="level" required>
+
+                            {{-- @if (old('level',$d->level) == $d->level)
                             <option value="{{ $d->level }}" selected>{{ $d->level }}</option>
-                        @endif --}}
-                        <option <?php if( $d->level =="admin" ) echo "selected" ; ?> value="admin">Admin
-                        </option>
-                        <option <?php if( $d->level =="superadmin" ) echo "selected" ; ?> value="superadmin">
-                            Super
-                            Admin</option>
-                    </select>
+                            @endif --}}
+                            <option <?php if( $d->level =="admin" ) echo "selected" ; ?> value="admin">Admin
+                            </option>
+                            <option <?php if( $d->level =="superadmin" ) echo "selected" ; ?> value="superadmin">
+                                Super
+                                Admin</option>
+                        </select>
+                    </div>
                 </div>
-        </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i>
-                Tutup</button>
-            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i>
+                        Tutup</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
 </div>
 @endforeach
 
@@ -251,5 +265,28 @@
     </div>
 </div>
 @endforeach
+{{-- <script type="text/javascript">
+    $('#search').on('keyup', function () {
+        $value = $(this).val();
+        $.ajax({
+            url: "{{ url('') }}/user/search/",
+data: {
+'search': $value
+},
+success: function (data) {
+$('tbody').html(data);
+}
+});
+})
+
+</script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'csrftoken': '{{ csrf_token() }}'
+        }
+    });
+
+</script> --}}
 {{-- @include('sweetalert::alert') --}}
 @endsection

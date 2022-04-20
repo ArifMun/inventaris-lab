@@ -13,7 +13,7 @@ class AuthController extends Controller
 
     public function index()
     {
-        return view('index');
+        return view('login.login');
     }
     
     public function proses_login(Request $request)
@@ -35,14 +35,14 @@ class AuthController extends Controller
                     // if($user->id == 1){
                     //     $ip;
                     // }else if($user->id == 2)
-                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Login');
+                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Masuk');
                     
                 } else if ($user->level == 'superadmin') {
                     DB::table('inv_akun')
                         ->update([
                         'ip_login' => $request->getClientIp()
                     ]);
-                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Login');
+                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Masuk');
                 }
                 return redirect()->intended('/');
             }

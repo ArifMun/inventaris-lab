@@ -16,10 +16,12 @@ class InvPengajuan extends Migration
         Schema::create('inv_pengajuan', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('id_barang');
-            $table->text('keterangan');
+            $table->string('nama_barang');
+            $table->text('keterangan')->nullable();
             $table->string('jumlah_pengajuan');
+            $table->enum('pengajuan',['sudah','belum']);
             $table->enum('verifikasi',['sudah','belum']);
-            $table->timestamps();
+            // $table->timestamps();
         }); 
     }
 

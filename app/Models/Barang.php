@@ -15,6 +15,7 @@ class Barang extends Model
         'nama_barang',
         'kategori',
         'jumlah',
+        'unit',
         'penulis',
         'keterangan',
         // 'created_at',
@@ -28,6 +29,14 @@ class Barang extends Model
     public function kategori(){
         return $this->belongsTo(Kategori::class);
     }
+
+    public function pengajuan(){
+        return $this->hasMany(Pengajuan::class);
+    }
+    
+    // public function user(){
+    //     return $this->belongsTo(User::class);
+    // }
 
     // public function user(){
     //     return $this->belongsTo(User::class);

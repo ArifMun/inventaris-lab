@@ -23,21 +23,6 @@ class BarangController extends Controller
         return view('admin.master.barang.barang',compact('barang','kategori'));
     }
 
-    public function search(Request $request){
-		$search = $request->search;
-        $barang = Barang::join('inv_kategori','inv_kategori.id','=','inv_barang.kategori')
-        ->select('inv_barang.*','inv_kategori.nama_kategori')
-        ->where('nama_barang','like',"%".$search."%")
-        ->paginate();
- 
-        $kategori = Kategori::all();
-        // $barang = DB::table('inv_barang')
-        // ->where('nama_barang','like',"%".$search."%")
-        // ->paginate();
-
-        return view('admin.master.barang.barang',compact('barang','kategori'));
-    }
-
     public function autofill($id){
         // $data = DB::table('inv_kategori')->where('id',$id)->get();
         $data = Kategori::find($id);
@@ -55,7 +40,7 @@ class BarangController extends Controller
     		    $kode1 = "000";
             } elseif (strlen($kode) == 2) {
                 $kode1 = "00";
-            } elseif (strlen($kode == 3)) {
+            } elseif (strlen($kode) == 3) {
                 $kode1 = "0";
             }
 
@@ -72,6 +57,7 @@ class BarangController extends Controller
             'no_barang'   => $kodeBaru,
             'nama_barang' => $request->nama_barang,
             'jumlah'      => $request->jumlah,
+            'unit'        => $request->unit,
             'penulis'     => $request->penulis,
             'keterangan'  => $request->keterangan,
             
@@ -84,12 +70,13 @@ class BarangController extends Controller
     public function update(Request $request, $id)
     {
         $barang = Barang::find($id);
-        $barang->kategori = $request->kategori;
-        $barang->no_barang = $request->no_barang;
+        $barang->kategori    = $request->kategori;
+        $barang->no_barang   = $request->no_barang;
         $barang->nama_barang = $request->nama_barang;
-        $barang->jumlah = $request->jumlah;
-        $barang->penulis = $request->penulis;
-        $barang->keterangan = $request->keterangan;
+        $barang->jumlah      = $request->jumlah;
+        $barang->unit        = $request->unit;
+        $barang->penulis     = $request->penulis;
+        $barang->keterangan  = $request->keterangan;
         $barang->update();
 
         return redirect('/barang')->with('success', 'Data Berhasil Diubah');

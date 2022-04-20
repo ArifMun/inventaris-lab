@@ -22,6 +22,9 @@ class User extends Authenticatable
     protected $table = 'inv_akun';
     // protected $guarded = ['ip_login'];
     protected $fillable = [
+        'nama',
+        'no_induk',
+        'jabatan',
         'username',
         'password',
         'level',
@@ -48,9 +51,9 @@ class User extends Authenticatable
     //                 ->orWhere('nama','like','%'. $search . '%');
     // });
 
-    // }
-    // public function identitas(){
-    //     return $this->hasMany(Identitas::class);
+    
+    // public function pengguna(){
+    //     return $this->hasMany(Pengguna::class);
     // }
 
     // const CREATED_AT = 'created_at';

@@ -35,7 +35,7 @@
 <body class="login">
     <div class="wrapper wrapper-login ">
         <div class="container container-login animated fadeIn">
-            <h3 class="text-center">Silahkan Sign In</h3>
+            <h3 class="text-center">Silahkan Masuk</h3>
 
             <form method="POST" action="{{url('proses_login')}}">
                 @csrf
@@ -54,8 +54,9 @@
                         </div>
                     </div>
                     <div class="form-action mb-3">
-                        <button type="submit" class="btn btn-primary btn-rounded btn-login">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-rounded btn-login">Masuk</button>
                     </div>
+                    <a href="/"> <i class="fa fa-arrow-alt-circle-left"></i> Kembali ke Beranda</a>
                 </div>
             </form>
         </div>

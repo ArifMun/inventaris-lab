@@ -18,33 +18,33 @@ class UserController extends Controller
         return view('admin.master.user.user',compact('user'));
     }
 
-    public function search(Request $request){
-        // menangkap data pencarian
-		$search = $request->search;
- 
-        // mengambil data dari table pegawai sesuai pensearchan data
-        $user = DB::table('inv_akun')
-        ->where('username','like',"%".$search."%")
-        // ->orWhere('nama','like',"%".$search."%")
-        ->paginate();
-
-        // mengirim data user ke view index
-        return view('admin.master.user.user',['user' => $user]);
-    }
+        
 
     public function store(Request $request)
     {
-        $validasi = $request->validate([
+
+        $validasi = Validator::make(
+            $request->all(),
+            [
+            'nama'     => 'required',
+            'jabatan'  => 'required',
+            'no_induk' => 'required|unique:inv_akun',
             'username' => 'required|min:3|max:255|unique:inv_akun',
             'password' => 'required|min:5|max:255',
             'level'    => 'required'
         ]);
 
-        $validasi['password'] = Hash::make($validasi['password']);
+        if($validasi->fails()){
+            return back()->with('warning', 'Data Tidak Tersimpan')
+            ->withErrors($validasi);
+        }else{
+            // $validasi['password'] = Hash::make($validasi['password']);
+            $validasi->password = Hash::make($request->password);
+            User::create($validasi);
+            return redirect('/user')->with('success', 'Data Berhasil Disimpan');
+        }
 
-        User::create($validasi);
 
-        return redirect('/user')->with('success', 'Data Berhasil Disimpan');
     }
 
     public function update(Request $request, $id)
@@ -53,6 +53,9 @@ class UserController extends Controller
         $validasi = Validator::make(
             $request->all(),
             [
+            'nama'     => 'required',
+            'jabatan'  => 'required',
+            'no_induk' => 'required|unique:inv_akun',
             'username' => 'required|min:3|max:255|unique:inv_akun',
             'password' => 'required|min:5|max:255',
             'level'    => 'required'
@@ -65,6 +68,9 @@ class UserController extends Controller
             ->withInput($input);
         }else{
             $validasi = User::find($id);
+            $validasi->nama     = $request->nama;
+            $validasi->jabatan  = $request->jabatan;
+            $validasi->no_induk = $request->no_induk;
             $validasi->username = $request->username;
             $validasi->password = Hash::make($request->password);
             $validasi->level    = $request->level;

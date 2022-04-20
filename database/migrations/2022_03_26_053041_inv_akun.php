@@ -15,6 +15,9 @@ class InvAkun extends Migration
     {
         Schema::create('inv_akun', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
+            $table->string('nama');
+            $table->integer('no_induk');
+            $table->string('jabatan');
             $table->string('username');
             $table->string('password')->unique();
             $table->enum('level',['admin','superadmin']);

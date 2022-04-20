@@ -17,11 +17,17 @@ class AkunSeeder extends Seeder
     public function run()
     {
         DB::table('inv_akun')->insert([
+            'nama' => 'arif',
+            'no_induk' => '23424234',
+            'jabatan' => 'Kaprodi',
             'username' => 'admin',
             'password' => Hash::make('admin'),
             'level' =>'admin',
         ]);
         DB::table('inv_akun')->insert([
+            'nama' => 'muntaha',
+            'no_induk' => '234242978',
+            'jabatan' => 'Kepala LAB',
             'username' => 'superadmin',
             'password' => Hash::make('superadmin'),
             'level' =>'superadmin'

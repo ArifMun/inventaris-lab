@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('admin.layout.layout')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="page-inner">
             <div class="page-header">
                 <h4 class="page-title">Data Kategori</h4>
-                <ul class="breadcrumbs">
+                {{-- <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
                             <i class="flaticon-home"></i>
@@ -25,7 +25,7 @@
                     <li class="nav-item">
                         <a href="#">Kategori</a>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
             <div class="row">
                 <div class="col-md-12">

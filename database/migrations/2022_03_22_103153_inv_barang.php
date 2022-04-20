@@ -18,8 +18,9 @@ class InvBarang extends Migration
             $table->string('no_barang');
             $table->string('nama_barang');
             $table->string('kategori');
-            // $table->foreignId('id_akun');
+            // $table->integer('id_akun');
             $table->integer('jumlah');
+            $table->string('unit');
             $table->enum('penulis',['admin','superadmin']);
             $table->text('keterangan')->nullable();
             // $table->timestamps();
