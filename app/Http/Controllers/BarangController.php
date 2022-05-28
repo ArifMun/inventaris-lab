@@ -6,7 +6,6 @@ use App\Models\Kategori;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-// use DB;
 use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
@@ -45,13 +44,6 @@ class BarangController extends Controller
             }
 
     	$kodeBaru = $request->kode_kategori.$kode1.$incrementKode;
-        // if($kode){
-        //     $urutan = (int) substr($kode, 3, 3);   
-        //     // $urutan++;
-        //     $kode_kategori = $request->get('no_barang') . sprintf("%03s", $urutan);
-        // }else{
-        //     $kode_kategori = $request->get('no_barang')."001";
-        // }
         $barang=Barang::create([
             'kategori'    => $request->kategori,
             'no_barang'   => $kodeBaru,
@@ -62,8 +54,6 @@ class BarangController extends Controller
             'keterangan'  => $request->keterangan,
             
         ]);
-        // dd($barang);
-
         return redirect('/barang')->with('success', 'Data Berhasil Disimpan');
     }
 

@@ -18,8 +18,6 @@ class UserController extends Controller
         return view('admin.master.user.user',compact('user'));
     }
 
-        
-
     public function store(Request $request)
     {
 
@@ -44,7 +42,6 @@ class UserController extends Controller
             return redirect('/user')->with('success', 'Data Berhasil Disimpan');
         }
 
-
     }
 
     public function update(Request $request, $id)
@@ -55,8 +52,8 @@ class UserController extends Controller
             [
             'nama'     => 'required',
             'jabatan'  => 'required',
-            'no_induk' => 'required|unique:inv_akun',
-            'username' => 'required|min:3|max:255|unique:inv_akun',
+            'no_induk' => 'required',
+            'username' => 'required|min:3|max:255',
             'password' => 'required|min:5|max:255',
             'level'    => 'required'
         ]);

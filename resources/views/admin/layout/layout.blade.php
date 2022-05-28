@@ -49,7 +49,7 @@
             <div class="bg">
                 <!-- Logo Header -->
                 <div class="logo-header">
-                    <a href="/dashboard" class="logo">
+                    <a href="/" class="logo">
                         <img src="/assets/img/psti-logo.png" alt="navbar brand" class="navbar-brand" width="130px">
                     </a>
                     <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
@@ -104,7 +104,7 @@
                                 <ul class="dropdown-menu dropdown-user animated fadeIn">
                                     <li>
                                         {{-- <div class="dropdown-divider"></div> --}}
-                                        <a class="dropdown-item" href="/"><i class="fa fa-home"></i> Beranda</a>
+                                        <a class="dropdown-item" href="/beranda"><i class="fa fa-home"></i> Beranda</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="/logout"><i
                                                 class="fa fa-arrow-alt-circle-left"></i>
@@ -123,8 +123,8 @@
             <div class="sidebar-wrapper scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav">
-                        <li class="nav-item {{ Request()->is('dashboard')? 'active' : '' }}">
-                            <a href="/dashboard">
+                        <li class="nav-item {{ Request()->is('/')? 'active' : '' }}">
+                            <a href="/">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
                             </a>
@@ -136,14 +136,14 @@
                             <h4 class="text-section">Administrator</h4>
                         </li>
                         @if (Auth::user()->level == 'admin'||'superadmin')
-                        @if (Auth::user()->level =='superadmin')
+                        {{-- @if (Auth::user()->level =='superadmin') --}}
                         <li class="nav-item {{ Request()->is('user')? 'active' : '' }}">
                             <a href="/user">
                                 <i class="fas fa-users"></i>
                                 <p>Data Pengguna</p>
                             </a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
                         <li class="nav-item {{ Request()->is('kategori')? 'active' : '' }}">
                             <a href="/kategori">
                                 <i class="fas fa-tags"></i>
@@ -168,8 +168,7 @@
                                 <p>Pengajuan</p>
                             </a>
                         </li>
-                        @endif
-                        <li class="nav-item   {{ Request()->is('laporan','laporan-pengajuan')? 'active' : '' }}">
+                        <li class="nav-item  {{ Request()->is('laporan','laporan-pengajuan')? 'active' : '' }}">
                             <a data-toggle="collapse" href="#base">
                                 <i class="fas fa-layer-group"></i>
                                 <p>Laporan</p>
@@ -179,7 +178,7 @@
                                 <ul class="nav nav-collapse">
                                     <li class="nav-item  {{ Request()->is('laporan')? 'active' : '' }}">
                                         <a href="/laporan">
-                                            <span class="sub-item">Laporan Barang</span>
+                                            <span class="sub-item ">Laporan Barang</span>
                                         </a>
                                     </li>
                                     <li class="nav-item  {{ Request()->is('laporan-pengajuan')? 'active' : '' }}">
@@ -190,6 +189,7 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

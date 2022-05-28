@@ -71,7 +71,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Barang</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Pilih Kategori</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -86,8 +86,7 @@
                         <div class="row">
                             <div class="col">
                                 <label>Cetak Laporan</label>
-                                <select class="form-control" name="kategori" onchange="no_kategori()" id="kategori"
-                                    required>
+                                <select class="form-control" name="kategori" id="kategori" required>
                                     <option value="" hidden="">-- Pilih Kategori --</option>
                                     @foreach ($kategori as $k)
                                     <option value="{{ $k->id }}">{{ $k->nama_kategori }}</option>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class KategoriController extends Controller
 {
@@ -14,24 +15,41 @@ class KategoriController extends Controller
 
     public function store(Request $request)
     {
-        Kategori::create([
-            'nama_kategori' => $request->nama_kategori,
-            'kode_kategori' => $request->kode_kategori,
+        $validasi = Validator::make(
+            $request->all(),
+            [
+            'nama_kategori'     => 'required|unique:inv_kategori',
+            'kode_kategori'     => 'required|unique:inv_kategori'
         ]);
 
-        return redirect('/kategori')->with('success', 'Data Berhasil Disimpan');
+        if($validasi->fails()){
+            return back()->with('warning', 'Data Tidak Tersimpan');
+        }else{
+            Kategori::create($validasi);
+            return redirect('/kategori')->with('success', 'Data Berhasil Disimpan');
+        }
+
     }
 
     public function update(Request $request, $id)
     {
-        $kategori = Kategori::find($id);
-        $kategori->nama_kategori = $request->nama_kategori;
-        $kategori->kode_kategori = $request->kode_kategori;
-        $kategori->save();
+        $validasi = Validator::make(
+            $request->all(),
+            [
+            'nama_kategori'     => 'required|unique:inv_kategori',
+            'kode_kategori'     => 'required|unique:inv_kategori'
+        ]);
 
-        // dd($kategori);
+        if($validasi->fails()){
+            return back()->with('warning', 'Data Tidak Tersimpan');
+        }else{
+            $kategori = Kategori::find($id);
+            $kategori->nama_kategori = $request->nama_kategori;
+            $kategori->kode_kategori = $request->kode_kategori;
+            $kategori->save();
+            return redirect('/kategori')->with('success', 'Data Berhasil Diubah');
+        }
 
-        return redirect('/kategori')->with('success', 'Data Berhasil Diubah');
     }
 
     /**

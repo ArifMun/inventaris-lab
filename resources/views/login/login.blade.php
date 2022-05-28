@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Sistem Inventaris</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <link rel="icon" href="/assets/img/icon.ico" type="image/x-icon" />
+    <link rel="icon" href="/assets/img/psti.png" type="image/x-icon" />
 
     <!-- Fonts and icons -->
     <script src="/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -56,7 +56,7 @@
                     <div class="form-action mb-3">
                         <button type="submit" class="btn btn-primary btn-rounded btn-login">Masuk</button>
                     </div>
-                    <a href="/"> <i class="fa fa-arrow-alt-circle-left"></i> Kembali ke Beranda</a>
+                    <a href="/beranda"> <i class="fa fa-arrow-alt-circle-left"></i>Beranda</a>
                 </div>
             </form>
         </div>

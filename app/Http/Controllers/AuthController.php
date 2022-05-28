@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
@@ -35,14 +33,14 @@ class AuthController extends Controller
                     // if($user->id == 1){
                     //     $ip;
                     // }else if($user->id == 2)
-                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Masuk');
+                    return redirect()->intended('/')->with('success','Anda Berhasil Masuk');
                     
                 } else if ($user->level == 'superadmin') {
                     DB::table('inv_akun')
                         ->update([
                         'ip_login' => $request->getClientIp()
                     ]);
-                    return redirect()->intended('dashboard')->with('success','Anda Berhasil Masuk');
+                    return redirect()->intended('/')->with('success','Anda Berhasil Masuk');
                 }
                 return redirect()->intended('/');
             }

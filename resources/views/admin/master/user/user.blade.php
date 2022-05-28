@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <h4 class="card-title">Tambah Data</h4>
+                                <h4 class="card-title">Tambah Data Pengguna</h4>
                                 <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
                                     data-target="#modalAddUser">
                                     <i class="fa fa-plus"></i>
@@ -98,7 +98,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Tambah User</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pengguna</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -109,27 +109,37 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nama Lengkap</label>
-                        <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap ..">
+                        <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap .." required>
                     </div>
 
                     <div class="form-group">
-                        <label>Jabatan</label>
-                        <input type="text" class="form-control" name="jabatan" placeholder="Jabatan ..">
+                        <div class="row">
+                            <div class="col">
+                                <label>Jabatan</label>
+                                <input type="text" class="form-control" name="jabatan" placeholder="Jabatan .."
+                                    required>
+                            </div>
+                            <div class="col">
+                                <label>No induk</label>
+                                <input type="text" class="form-control" name="no_induk" placeholder="No induk .."
+                                    required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label>No induk</label>
-                        <input type="text" class="form-control" name="no_induk" placeholder="No induk ..">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" name="username" placeholder="Username ..">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="text" class="form-control" name="password" placeholder="Password ..">
+                        <div class="row">
+                            <div class="col">
+                                <label>Username</label>
+                                <input type="text" class="form-control" name="username" placeholder="Username .."
+                                    required>
+                            </div>
+                            <div class="col">
+                                <label>Password</label>
+                                <input type="text" class="form-control" name="password" placeholder="Password .."
+                                    required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -180,26 +190,33 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Jabatan</label>
-                        <input type="text" value="{{ $d->jabatan }}" class="form-control" name="jabatan"
-                            placeholder="Jabatan ..">
+                        <div class="row">
+                            <div class="col">
+                                <label>Jabatan</label>
+                                <input type="text" value="{{ $d->jabatan }}" class="form-control" name="jabatan"
+                                    placeholder="Jabatan .." required>
+                            </div>
+                            <div class="col">
+                                <label>No induk</label>
+                                <input type="text" value="{{ $d->no_induk }}" class="form-control" name="no_induk"
+                                    placeholder="No induk .." required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label>No induk</label>
-                        <input type="text" value="{{ $d->no_induk }}" class="form-control" name="no_induk"
-                            placeholder="No induk ..">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" value="{{ $d->username }}" class="form-control" name="username"
-                            placeholder="Username ..">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="text" class="form-control" name="password" placeholder="Password ..">
+                        <div class="row">
+                            <div class="col">
+                                <label>Username</label>
+                                <input type="text" value="{{ $d->username }}" class="form-control" name="username"
+                                    placeholder="Username .." required>
+                            </div>
+                            <div class="col">
+                                <label>Password</label>
+                                <input type="text" class="form-control" name="password" placeholder="Password .."
+                                    required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">

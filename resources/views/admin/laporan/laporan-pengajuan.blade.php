@@ -14,7 +14,8 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Cetak Pengajuan</h4>
-                                <a href="laporan/cetak-laporan-pengajuan" class="btn btn-primary btn-round ml-auto">
+                                <a href="laporan/cetak-laporan-pengajuan" data-toggle="modal"
+                                    data-target="#modalCetakLaporan" class="btn btn-primary btn-round ml-auto">
                                     <i class="fa fa-print"></i>
                                     Cetak
                                 </a>
@@ -72,6 +73,45 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCetakLaporan" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cetak Pengajuan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="get" enctype="multipart/form-data" action="laporan/cetak-laporan-pengajuan">
+                @csrf
+                <div class="modal-body">
+                    {{-- <input type="hidden" value="{{ Auth::user()->id }}"> --}}
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <select class="form-control" name="verifikasi" id="verifikasi" required>
+                                    <option value="" hidden="">-- Pilih Verifikasi --</option>
+                                    <option value="sudah">Sudah</option>
+                                    <option value="belum">Belum</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo">
+                        </i> Kembali</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-print"> </i> Print</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

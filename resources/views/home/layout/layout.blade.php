@@ -26,7 +26,7 @@
         });
 
     </script>
-    <title>Home</title>
+    <title>{{ $title }}</title>
 </head>
 <style>
     .bg {
@@ -38,16 +38,20 @@
         border-radius: 25px;
     }
 
+    /* li:hover {
+        background-color: #064875;
+        border-radius: 25px;
+    } */
+
 </style>
 
 <body>
-
 
     <div class="wrapper">
         <div class="bg">
             <nav class="navbar navbar-expand-lg ">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/"><img src="/assets/img/psti-logo.png" alt="navbar brand"
+                    <a class="navbar-brand" href="/beranda"><img src="/assets/img/psti-logo.png" alt="navbar brand"
                             class="navbar-brand" width="130px"></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -55,11 +59,11 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <ul class="navbar-nav ml-auto ">
+                        <ul class="navbar-nav ml-auto">
                             {{-- @if(Auth::user()->level =='' || null) --}}
                             <li>
                                 <a class="nav-link text-white {{ Request()->is('/')? 'bg-nav' : '' }}"
-                                    aria-current="page" href="/">Beranda</a>
+                                    aria-current="page" href="/beranda">Beranda</a>
                             </li>
                             <li>
                                 <a class="nav-link text-white {{ Request()->is('data-barang')? 'bg-nav' : '' }}"
@@ -74,19 +78,19 @@
                                     href="/pengadaan-barang">Pengadaan</a>
                             </li>
                             @auth
-                            <li class="nav-item dropdown">
+                            {{-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="text-light">Selamat Datang, {{ Auth::user()->nama }}</i></span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                            </li> --}}
                             <li>
-                                <a class="nav-link text-white" href="/dashboard">Dashboard</a>
+                                <b><a class="nav-link text-white" href="/">Dashboard</a></b>
                             </li>
                             <li>
                                 <a class="nav-link text-white" href="/logout"><i class="fa fa-arrow-circle-left"></i>
@@ -108,7 +112,7 @@
         @yield('content')
     </div>
 </body>
-<footer>ssasfdfds</footer>
+{{-- <footer>ssasfdfds</footer> --}}
 <!--   Core JS Files   -->
 <script src="/assets/js/core/jquery.3.2.1.min.js"></script>
 <script src="/assets/js/core/popper.min.js"></script>

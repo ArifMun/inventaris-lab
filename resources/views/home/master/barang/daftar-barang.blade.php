@@ -10,7 +10,7 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">DAFTAR BARANG</h4>
-                                <a href="laporan/cetak-laporan" data-toggle="modal" data-target="#modalCetakLaporan"
+                                <a href="cetak-laporan" data-toggle="modal" data-target="#modalCetakLaporan"
                                     class="btn btn-success btn-rounded ml-auto">
                                     <i class="fa fa-print"></i>
                                     Cetak
@@ -71,7 +71,7 @@
                 </button>
             </div>
 
-            <form method="get" enctype="multipart/form-data" action="laporan/cetak-laporan">
+            <form method="get" enctype="multipart/form-data" action="cetak-laporan">
                 @csrf
                 <div class="modal-body">
                     {{-- <input type="hidden" value="{{ Auth::user()->id }}"> --}}

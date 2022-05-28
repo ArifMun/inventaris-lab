@@ -22,10 +22,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[HomeController::class, 'index'])->name('index');
+Route::get('/beranda',[HomeController::class, 'index'])->name('index');
 Route::get('/data-barang',[HomeController::class, 'barang'])->name('daftar-barang');
 Route::get('/kategori-barang',[HomeController::class, 'kategori'])->name('kategori-barang');
 Route::get('/pengadaan-barang',[HomeController::class, 'pengadaan'])->name('pengadaan-barang');
+Route::get('/cetak-laporan',[HomeController::class, 'cetakBarang']);
+// Route::get('laporan/cetak-laporan', [LaporanController::class, 'cetak'])->Auth::guest();
 // Route::post('/cek_login',[AuthController::class, 'cek_login']);
 // Route::get('/logout',[AuthController::class, 'logout']);
 
@@ -38,8 +40,14 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'CheckLevel:admin,superadmin']], function(){
     
-    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
     // Route::resource('admin', AkunController::class);
+
+    // Data master (User)
+    Route::get('user', [UserController::class, 'index']);
+    Route::post('/user/store', [UserController::class, 'store']);
+    Route::post('/user/{id}/update', [UserController::class, 'update']);
+    Route::get('/user/{id}/destroy', [UserController::class, 'destroy']);
     
     // Data master (Kategori)
     Route::get('kategori', [KategoriController::class, 'index']);
@@ -70,13 +78,13 @@ Route::group(['middleware' => ['auth', 'CheckLevel:admin,superadmin']], function
     Route::get('/pengajuan/id-barang/{id} ', [PengajuanController::class, 'autofill']);
 });
 
-Route::group(['middleware' => ['auth', 'CheckLevel:superadmin']], function(){ 
-    // Data master (User)
-    Route::get('user', [UserController::class, 'index']);
-    Route::post('/user/store', [UserController::class, 'store']);
-    Route::post('/user/{id}/update', [UserController::class, 'update']);
-    Route::get('/user/{id}/destroy', [UserController::class, 'destroy']);
-});
+// Route::group(['middleware' => ['auth', 'CheckLevel:superadmin']], function(){ 
+//     // Data master (User)
+//     Route::get('user', [UserController::class, 'index']);
+//     Route::post('/user/store', [UserController::class, 'store']);
+//     Route::post('/user/{id}/update', [UserController::class, 'update']);
+//     Route::get('/user/{id}/destroy', [UserController::class, 'destroy']);
+// });
 
 // Route::group(['middleware' => ['auth', 'CheckLevel:superadmin']], function(){
 //     Route::resource('superadmin', AkunController::class);

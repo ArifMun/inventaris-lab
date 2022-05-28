@@ -14,6 +14,11 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center">
                                 <h4 class="card-title">Tambah Pengajuan</h4>
+                                {{-- <a href="laporan/cetak-laporan-pengajuan" class="btn btn-primary btn-round ml-auto"
+                                    data-toggle="modal" data-target="#modalAddPengajuan">
+                                    <i class="fa fa-print"></i>
+                                    Cetak Pengajuan
+                                </a> --}}
                                 <a href="/pengajuan/create" class="btn btn-primary btn-round ml-auto"
                                     data-toggle="modal" data-target="#modalAddPengajuan">
                                     <i class="fa fa-plus"></i>
@@ -25,16 +30,19 @@
 
                             <div class="table-responsive">
                                 <table id="add-row" class="display table table-striped table-hover">
-                                    <thead align="center">
-                                        <td>No</td>
-                                        <td>No Barang</td>
-                                        <td>Nama Barang</td>
-                                        <td>Unit</td>
-                                        <td>Keterangan</td>
-                                        <td>Jumlah Pengajuan</td>
-                                        <td>Pengajuan</td>
-                                        <td>Verifikasi</td>
-                                        <td>Action</td>
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No Barang</th>
+                                            <th>Nama Barang</th>
+                                            <th>Unit</th>
+                                            <th>Keterangan</th>
+                                            <th>Jumlah</th>
+                                            <th>Penulis</th>
+                                            <th>Pengajuan</th>
+                                            <th>Verifikasi</th>
+                                            <th>Action</th>
+                                        </tr>
                                     </thead>
 
                                     <tbody>
@@ -59,8 +67,9 @@
                                             <td>{{ $row->no_barang }}</td>
                                             <td>{{ $row->nama_barang }}</td>
                                             <td>{{ $row->unit }}</td>
-                                            <td>{{ substr($row->keterangan,0,5) }}..</td>
+                                            <td>{{ substr($row->keterangan,0,5) }}</td>
                                             <td>{{ $row->jumlah_pengajuan }}</td>
+                                            <td>{{ $row->penulis }}</td>
                                             <td><span class=" <?=$colora;?>">{{ $row->pengajuan }}</span></td>
                                             <td>
                                                 <span class=" <?=$color;?>">{{ $row->verifikasi }}</span>
@@ -134,6 +143,11 @@
                             <div class="col">
                                 <label>Unit</label>
                                 <input type="text" class="form-control" name="unit" id="unit" placeholder="Unit .."
+                                    readonly>
+                            </div>
+                            <div class="col">
+                                <label>Penulis</label>
+                                <input type="text" class="form-control" name="penulis" value="{{ Auth::user()->level }}"
                                     readonly>
                             </div>
                         </div>
@@ -232,6 +246,11 @@
                                 <label>Unit</label>
                                 <input type="text" class="form-control" name="unit" value="{{ $p->unit }}"
                                     placeholder="Unit .." readonly>
+                            </div>
+                            <div class="col">
+                                <label>Penulis</label>
+                                <input type="text" class="form-control" name="penulis" value="{{ Auth::user()->level }}"
+                                    readonly>
                             </div>
                         </div>
                     </div>

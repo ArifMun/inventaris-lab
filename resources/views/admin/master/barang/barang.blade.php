@@ -34,7 +34,7 @@
                                             <th>Penulis</th>
                                             <th>Jumlah</th>
                                             <th>Unit</th>
-                                            <th>Keterangan</th>
+                                            <th>Kondisi</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -53,7 +53,7 @@
                                             <td>{{ $row->penulis }}</td>
                                             <td>{{ $row->jumlah }}</td>
                                             <td>{{ $row->unit }}</td>
-                                            <td>{{ substr($row->keterangan,0,5) }}..</td>
+                                            <td>{{ substr($row->keterangan,0,5) }}</td>
                                             <td>
                                                 <a href="#editDataBarang{{ $row->id }}" data-toggle="modal"
                                                     class="btn btn-primary btn-xs"><i class="fa fa-edit">

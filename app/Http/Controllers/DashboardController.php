@@ -13,8 +13,10 @@ class DashboardController extends Controller
     public function index(){
         $pengguna = User::count();
         $barang = Barang::count();
+        $barangrusak = Barang::where('keterangan','rusak')->count();
+        $barangbaik = Barang::where('keterangan','baik')->count();
         $kategori = Kategori::count();
         $pengajuan = Pengajuan::count();
-        return view('admin.dashboard.dashboard',compact('pengguna','barang','kategori','pengajuan'));
+        return view('admin.dashboard.dashboard',compact('pengguna','barang','kategori','pengajuan','barangrusak','barangbaik'));
     }
 }

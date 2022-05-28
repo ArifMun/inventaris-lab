@@ -84,16 +84,13 @@
                     setlocale(LC_ALL, 'ID');
                     date_default_timezone_set('Asia/Jakarta');
                     $hariIni = new DateTime();
+                    // echo "Purworejo" .",". $hariIni()->format('D M y, H:i');
                     echo "Purworejo," .strftime(' %d %B %Y', $hariIni->getTimestamp()) . '<br>';
                         ?>
         </p>
-        @foreach ($users as $user)
-        @if ($user->level=="admin")
-        <p align="center">Mengetahui, {{ $user->jabatan }}</p><br><br>
-        <p align="center"><u><b> {{ $user->nama }}</b></u></p>
-        <p align="center">NIDN. {{ $user->no_induk }}</p>
-        @endif
-        @endforeach
+        <p align="center">Mengetahui, Ka.Lab</p><br><br>
+        <p align="center"><u><b> Muhammad Hamid Jumasa, M.Eng</b></u></p>
+        <p align="center">NIDN. 0603069001</p>
     </table>
 </body>
 

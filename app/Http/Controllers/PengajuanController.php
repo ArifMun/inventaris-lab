@@ -40,6 +40,7 @@ class PengajuanController extends Controller
             'no_barang'        => $request->no_barang,
             'nama_barang'      => $request->nama_barang,
             'jumlah_pengajuan' => $request->jumlah_pengajuan,
+            'penulis'          => $request->penulis,
             'unit'             => $request->unit,
             'pengajuan'        => $request->pengajuan,
             'verifikasi'       => $request->verifikasi,
@@ -55,6 +56,7 @@ class PengajuanController extends Controller
         $pengajuan->id_barang        = $request->id_barang;
         $pengajuan->nama_barang      = $request->nama_barang;
         $pengajuan->jumlah_pengajuan = $request->jumlah_pengajuan;
+        $pengajuan->penulis = $request->penulis;
         // $pengajuan->unit             = $request->unit;
         $pengajuan->pengajuan        = $request->pengajuan;
         $pengajuan->verifikasi       = $request->verifikasi;
